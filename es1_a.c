@@ -1,7 +1,7 @@
 #include<stdlib.h>
 #include <stdio.h>
 
-int main()
+int es1_a()
 {
 	
 	int A[16]={3,1,-1,0,0,7,-3,0,0,-3,9,-2,0,0,4,-10};	//matrice A
@@ -23,7 +23,7 @@ int main()
 			n=s;
 		if(s1>n1)
 			n1=s1;
-		printf("i=%d\t s=%d\t s1=%d\n",i,s,s1);
+		//printf("i=%d\t s=%d\t s1=%d\n",i,s,s1);
 	}
 	printf("la norma infinito di A e':%d\nla norma infinito di A1 e':%d\n",n,n1);
 	return 0;

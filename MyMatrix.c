@@ -162,7 +162,7 @@ MATRIX *gauss_elimination(void *m_)
             }
             if(row_to_swap<0)
             {
-                fprintf(stderr,"Fottuto");
+                fprintf(stderr,"Operazione riduzione fallita\n");
                 return NULL;
             }
             swap_row(m, i, row_to_swap);
@@ -181,28 +181,66 @@ MATRIX *gauss_elimination(void *m_)
     return m;
 }
 
+
+MATRIX *sost_indietro(const void *const m1_, const void *const m2_)
+{
+	const MATRIX *m1 = (MATRIX*)m1_;
+	const MATRIX *m2 = (MATRIX*)m2_;
+	if(m1->column != m1->row)
+	{
+		fprintf(stderr, "Illegal operation()\n");
+		exit(-1);
+	}
+	if (m1->row != m2->row)
+	{
+		fprintf(stderr, "Illegal operation()\n");
+		exit(-1);
+	}
+	MATRIX *result = (MATRIX *)malloc(sizeof(MATRIX));
+	result->row = m1->row;
+	result->column = 1;
+	result->matrix = new_matrix(result->row, result->column);
+	elem **X = result->matrix;
+	elem **A = m1->matrix;
+	elem **b = m2->matrix;
+	
+	for (int i = result->row; i >= 0; i--)
+	{
+		elem tmp = 0;
+		for (int j = i+1; j < result->row; j++)
+		{
+			tmp += A[i][j] * X[j][0];
+		}
+		printf("1");
+		elem aux = b[i][0] - tmp;
+		printf("2");
+		X[i][0] = aux / A[i][i];
+		printf("3\n");
+	}
+	return result;
+}
 /*
  *
  *
  *
  */
 
-void print_matrice(const void *const m_)
+void print_matrice(const void *const m_, FILE* out)
 {
     MATRIX*m=(MATRIX*)m_;
     int i, j;
-
-    printf("\nThe matrix is:\n\n");
+	//printf("%d %d\n",m->column, m->row);
     for( i = 0; i < m->row; i++ ) {
         for( j = 0; j < m->column; j++ ) {
-            printf( "%.4f ", (m->matrix)[ i ][ j ] );
+			//printf("i=%d j=%d\n", i, j);
+			fprintf(out,"%.4f ", (m->matrix)[i][j]);
         }
-        printf("\n");
+		fprintf(out,"\n");
     }
 
 }
 
-void print_matrix_vertex(const void *const m_, const void *const v_)
+void print_matrix_vertex(const void *const m_, const void *const v_, FILE* out)
 {
     MATRIX*m=(MATRIX*)m_;
     MATRIX*v=(MATRIX*)v_;
@@ -214,16 +252,22 @@ void print_matrix_vertex(const void *const m_, const void *const v_)
         fprintf(stderr, "ERROR:\nThe two matrices are not compatible\n");
         exit(-1);
     }
-    printf("\nThe matrix A |b are:\n\n");
     int i, j;
     for( i = 0; i < m->row; i++ ) {
         for( j = 0; j < m->column; j++ ) {
             printf( "%.5f ", (m->matrix)[ i ][ j ] );
+			fprintf(out,"%.5f ", (m->matrix)[i][j]);
         }
         printf("\t| %.5f\n", (v->matrix)[i][0]);
+		fprintf(out,"\t| %.5f\n", (v->matrix)[i][0]);
     }
 }
 
 
 
 
+void fail_errno(const char* c)
+{
+	perror(c);
+	exit(EXIT_FAILURE);
+}

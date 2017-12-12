@@ -24,10 +24,14 @@ void free_matrix(void* );
 void swap_row(void* ,int ,int );
 MATRIX *matrix_multiplication(const void *const , const void *const );
 MATRIX *gauss_elimination(void *);
+MATRIX *sost_indietro(const void *const m1_, const void *const m2_);
 
 /*Stampe di matrici*/
-void print_matrice(const void *const);
-void print_matrix_vertex(const void *const ,const void *const);
+void print_matrice(const void *const m_, FILE* out);
+void print_matrix_vertex(const void *const m_, const void *const v_, FILE* out);
 
+
+/*altro*/
+void fail_errno(const char* c);
 
 #endif //MYMATRIX_H
