@@ -18,6 +18,7 @@ MATRIX *new_struct_MATRIX(int ,int );
 MATRIX *create_matrix( FILE *stream );
 MATRIX *clone_matrx(const void *const);
 MATRIX *create_sistem_matrix_vector(void *, void *);
+void divide_sistem_matrix_vector(void *, void **, void **);
 void free_matrix(void* );
 
 /*Operazioni su matrici*/

@@ -24,7 +24,7 @@ MATRIX *new_struct_MATRIX(const int r, const int c)
     MATRIX *m = (MATRIX *)malloc(sizeof(MATRIX));
     m->column = c;
     m->row = r;
-    m->matrix = new_matrix(r,c);
+	m->matrix = new_matrix(r,c);
     return m;
 }
 
@@ -83,7 +83,35 @@ MATRIX *create_sistem_matrix_vector(void *m_, void *v_)
     }
     return res;
 }
+void divide_sistem_matrix_vector(void * source, void **dest_matrix, void **dest_vector)
+{
+	const MATRIX *s = (MATRIX*)source;
+	int i, j;
+	if (s->column<2)
+	{
+		fprintf(stderr, "Illegal operation(divide_sistem_matrix_vector)\n");
+		exit(-1);
+	}
+	MATRIX *m = (void *)new_struct_MATRIX(s->row, s->column - 1);
+	MATRIX *v = (void *)new_struct_MATRIX(s->row, 1);
+	if(m ==NULL || v == NULL)
+	{
+		fprintf(stderr, "Error(divide_sistem_matrix_vector)\n");
+		exit(-1);
+	}
+	for (i = 0; i < s->row; ++i)
+	{
 
+		for (j = 0; j < s->column-1; ++j)
+		{
+			fflush(stdout);
+			(m->matrix)[i][j] = (s->matrix)[i][j];
+		}
+		(v->matrix)[i][0] = (s->matrix)[i][j];
+	}
+	*dest_matrix = (void*)m;
+	*dest_vector = (void*)v;
+}
 void free_matrix(void* m_)
 {
     MATRIX*m=(MATRIX*)m_;
@@ -191,7 +219,7 @@ MATRIX *sost_indietro(const void *const m1_, const void *const m2_)
 		fprintf(stderr, "Illegal operation()\n");
 		exit(-1);
 	}
-	if (m1->row != m2->row)
+	if (m1->row != m2->row && m2->column != 1)
 	{
 		fprintf(stderr, "Illegal operation()\n");
 		exit(-1);
@@ -203,19 +231,18 @@ MATRIX *sost_indietro(const void *const m1_, const void *const m2_)
 	elem **X = result->matrix;
 	elem **A = m1->matrix;
 	elem **b = m2->matrix;
-	
-	for (int i = result->row; i >= 0; i--)
+	int r = result->row-1;
+	X[r][0] = b[r][0] / A[r][r];
+	for (int i = r-1; i >= 0; i--)
 	{
+
 		elem tmp = 0;
 		for (int j = i+1; j < result->row; j++)
 		{
 			tmp += A[i][j] * X[j][0];
 		}
-		printf("1");
 		elem aux = b[i][0] - tmp;
-		printf("2");
 		X[i][0] = aux / A[i][i];
-		printf("3\n");
 	}
 	return result;
 }

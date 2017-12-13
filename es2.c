@@ -13,7 +13,7 @@ void createMatrix_x(const char* fileName, int row);
 
 int esercizio2(const char *const fileName)
 {
-	FILE *f1;
+	//CREAZIOE MATRICE A E VETORE x
 	FILE *matrixFile = fopen(fileName, "r");
 	if (!matrixFile)
 	{
@@ -22,13 +22,14 @@ int esercizio2(const char *const fileName)
 	}
 	MATRIX *A = create_matrix(matrixFile);
 	fclose(matrixFile);
+	//CALCOLO VETTORE b
 	createMatrix_x(tmpFile, A->row);
 	FILE* f = fopen(tmpFile, "r");
 	MATRIX *x = create_matrix(f);
 	fclose(f);
 	MATRIX *b = matrix_multiplication(A, x);
 	printf("\nIl vettore b e':\n");
-	f1 = fopen(file_b, "w");
+	FILE *f1 = fopen(file_b, "w");
 	if (!f1)
 	{
 		perror(NULL);
@@ -37,17 +38,9 @@ int esercizio2(const char *const fileName)
 	print_matrice(b, f1);
 	print_matrice(b, stdout);
 	fclose(f1);
-	/*
-	free_matrix(A);
-	free_matrix(x);
-	free_matrix(b);
-	return 0;
-	*/
+	//APPLICAZIONE RIDUZIONE DI GAUSS SUL SISTEMA A|b
 	MATRIX *A_b = create_sistem_matrix_vector(A, b);
-	print_matrice(A_b, stdout);
 	MATRIX *A_b_ridotto = gauss_elimination(A_b);
-
-	//MATRIX *x_;	
 	printf("\nIl sistema A|b ridotto e':\n");
 	FILE *f2 = fopen(file_b, "w");
 	if (!f2)
@@ -55,14 +48,20 @@ int esercizio2(const char *const fileName)
 		perror(NULL);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d %d\n", A_b_ridotto->column, A_b_ridotto->row);
 	print_matrice(A_b_ridotto, f2);
 	print_matrice(A_b_ridotto, stdout);
 	fclose(f2);
-	
-	printf("\nIl vettore x calcolato con la matrice A e il vettore b è:");
-	MATRIX* x_ = sost_indietro(A, b);
-	FILE *f3 = fopen(fileA_b, "w");
+	//CALCOLO DEL VETTORE x_
+	MATRIX *A_ridotto = NULL, *b_ridotto = NULL;
+	divide_sistem_matrix_vector(A_b_ridotto,(void **)&A_ridotto,(void **)&b_ridotto);
+	if (A_ridotto == NULL || b_ridotto == NULL)
+	{
+		printf("problema\n");
+		exit(-1);
+	}
+	printf("\nIl vettore x calcolato con la matrice A e il vettore b è:\n");
+	MATRIX* x_ = sost_indietro(A_ridotto, b_ridotto);
+	FILE *f3 = fopen(fileX_, "w");
 	if (!f3)
 	{
 		perror(NULL);
@@ -70,9 +69,7 @@ int esercizio2(const char *const fileName)
 	}
 	print_matrice(x_, f3);
 	print_matrice(x_, stdout);
-	fclose(f3);
-	
-	
+	fclose(f3);	
 	free_matrix(A);
 	free_matrix(x);
 	free_matrix(x_);
