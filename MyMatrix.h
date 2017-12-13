@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define elem float
 
@@ -34,5 +35,5 @@ void print_matrix_vertex(const void *const m_, const void *const v_, FILE* out);
 
 /*altro*/
 void fail_errno(const char* c);
-
+char* nomeFile(const char *dir, const char* f);
 #endif //MYMATRIX_H

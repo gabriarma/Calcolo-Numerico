@@ -298,3 +298,18 @@ void fail_errno(const char* c)
 	perror(c);
 	exit(EXIT_FAILURE);
 }
+
+
+char* nomeFile(const char *dir, const char* f)
+{
+	char *strDirFile = malloc(strlen(dir) + strlen(f) + 7);
+	if (strDirFile == NULL)
+	{
+		perror("error malloc"); exit(-1);
+	}
+	strDirFile = strcpy(strDirFile, "./");
+	strDirFile = strcat(strDirFile, dir);
+	strDirFile = strcat(strDirFile, "/");
+	strDirFile = strcat(strDirFile, f);
+	return strDirFile;
+}

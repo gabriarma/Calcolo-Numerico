@@ -1,20 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "MyMatrix.h"
-
-const char *tmpFile = "vettoreTuttiUni.txt";
-const char *fileX = "matriceX.txt";
-const char *fileX_ = "matriceX_.txt";
-const char *file_b = "matrice_b.txt";
-const char *fileA_b = "matrice_A|b.txt";
+#include "raccoltaEsercizi.h"
+#include "fileNameLis_lib.h"
 
 void createMatrix_x(const char* fileName, int row);
 
-int esercizio2(const char *const fileName)
+int esercizio2(const char *const dir)
 {
-	//CREAZIOE MATRICE A E VETORE x
-	FILE *matrixFile = fopen(fileName, "r");
+	//CREAZIOE MATRICE A
+	char *s;
+	s = nomeFile(dir, fileNameMatrice);
+	FILE *matrixFile = fopen(s, "r");
+	free(s);
 	if (!matrixFile)
 	{
 		perror(NULL);
@@ -22,14 +20,28 @@ int esercizio2(const char *const fileName)
 	}
 	MATRIX *A = create_matrix(matrixFile);
 	fclose(matrixFile);
-	//CALCOLO VETTORE b
-	createMatrix_x(tmpFile, A->row);
-	FILE* f = fopen(tmpFile, "r");
+
+	//CREAZIOE MATRICE x
+	s = nomeFile(dir, fileX);
+	createMatrix_x(s, A->row);
+	FILE* f = fopen(s, "r");
+	free(s);
+	if (!f)
+	{
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
 	MATRIX *x = create_matrix(f);
 	fclose(f);
+
+	//CALCOLO VETTORE b	
 	MATRIX *b = matrix_multiplication(A, x);
+
+	//STAMPO IL VETTORE b
 	printf("\nIl vettore b e':\n");
-	FILE *f1 = fopen(file_b, "w");
+	s = nomeFile(dir, file_b);
+	FILE *f1 = fopen(s, "w");
+	free(s);
 	if (!f1)
 	{
 		perror(NULL);
@@ -41,8 +53,12 @@ int esercizio2(const char *const fileName)
 	//APPLICAZIONE RIDUZIONE DI GAUSS SUL SISTEMA A|b
 	MATRIX *A_b = create_sistem_matrix_vector(A, b);
 	MATRIX *A_b_ridotto = gauss_elimination(A_b);
+
+	//STAMPO IL SIATEMA A|b
 	printf("\nIl sistema A|b ridotto e':\n");
-	FILE *f2 = fopen(file_b, "w");
+	s = nomeFile(dir, fileA_b);
+	puts(s);
+	FILE *f2 = fopen(s, "w");
 	if (!f2)
 	{
 		perror(NULL);
@@ -61,7 +77,8 @@ int esercizio2(const char *const fileName)
 	}
 	printf("\nIl vettore x calcolato con la matrice A e il vettore b è:\n");
 	MATRIX* x_ = sost_indietro(A_ridotto, b_ridotto);
-	FILE *f3 = fopen(fileX_, "w");
+	s = nomeFile(dir, fileX_);
+	FILE *f3 = fopen(s, "w");
 	if (!f3)
 	{
 		perror(NULL);
