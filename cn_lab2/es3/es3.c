@@ -88,3 +88,4 @@ void esercizio3(const char *const dir)
 	print_matrice(x_, stdout);
 	fclose(f_p);
 }
+

@@ -313,3 +313,4 @@ char* nomeFile(const char *dir, const char* f)
 	strDirFile = strcat(strDirFile, f);
 	return strDirFile;
 }
+

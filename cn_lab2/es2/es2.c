@@ -108,3 +108,4 @@ void createMatrix_x(const char* fileName, int row)
 	}
 	fclose(matrixFile);
 }
+

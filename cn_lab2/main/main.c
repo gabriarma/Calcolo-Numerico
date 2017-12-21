@@ -51,3 +51,4 @@ void createFile_fromString(const char *fileName, const char *const strMatrix)
 	fprintf(matrixFile, "%s", strMatrix);
 	fclose(matrixFile);
 }
+

@@ -28,3 +28,4 @@ int es1_a()
 	printf("la norma infinito di A e':%d\nla norma infinito di A1 e':%d\n",n,n1);
 	return 0;
 }
+
