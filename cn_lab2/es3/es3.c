@@ -76,7 +76,7 @@ void esercizio3(const char *const dir)
 	//soluzione Ax~=b+∂b
 	MATRIX *x_ = sost_indietro(A_ridotto, b_ridotto);
 	//stampa x nuovo
-	printf("Stanpo il vettore x perturbato\n");
+	printf("Stampo il vettore x perturbato\n");
 	s = nomeFile(dir, fileX_p);
 	FILE* f_p = fopen(s, "w");
 	if (!f_p)
