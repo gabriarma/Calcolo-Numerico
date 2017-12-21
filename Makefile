@@ -8,7 +8,7 @@ LIB_DIR = matrix_lib
 LDFLAGS = -L$(BIN_DIR) -lmatrix -lrt
 MATRIX_LIB=$(BIN_DIR)/libmatrix.a
 MAIN=$(BIN_DIR)/main
-MAIN_OBJS=$(BIN_DIR)/main.o $(BIN_DIR)/es1_a.o  $(BIN_DIR)/es1_b.o $(BIN_DIR)/es1_c.o $(BIN_DIR)/es2.o $(BIN_DIR)/es3.o
+MAIN_OBJS=$(BIN_DIR)/main.o $(BIN_DIR)/es1_a.o  $(BIN_DIR)/es1_b.o $(BIN_DIR)/es1_c.o $(BIN_DIR)/es2.o  $(BIN_DIR)/es3.o
 
 EXECS = $(MAIN)
 
