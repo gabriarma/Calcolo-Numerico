@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "raccoltaEsercizi.h"
+#include "fileNameLis_lib.h"
 
-const char *fileNameMatrix = "matrice.txt";
 const char* strA1="4 4 \n3 1 -1 0 \n0 7 -3 0 \n0 -3 9 -2 \n0 0 4 -10\n";  //Prima matrice dell'esercizio 1
 const char* strA2="4 4 \n2 4 -2 0 \n1 3 0 1 \n3 -1 1 2 \n0 -1 2 1\n";     //Seconda matrice dell'esercizio 1
 
@@ -18,22 +18,26 @@ int main()
 	printf("\nEsercizio 1:\n");
 	printf("\t-punto a:\n");
 	es1_a();
-	printf("\n\n\t*ì-punto b:\n");
-	s = nomeFile(direNameList[2], fileNameMatrix);
+	printf("\n\n\t*ï¿½-punto b:\n");
+	s = nomeFile(direNameList[2], fileNameMatrice);
 	es1_b(s);
 	printf("\n\n\t-punto c:\n");
-	s = nomeFile(direNameList[3], fileNameMatrix);
+	s = nomeFile(direNameList[3], fileNameMatrice);
 	es1_c(s);
 	//ESERCIZIO 2
-	s = nomeFile(direNameList[0], fileNameMatrix);
+	s = nomeFile(direNameList[0], fileNameMatrice);
 	createFile_fromString(s, strA1);
 	free(s);
-	s = nomeFile(direNameList[1], fileNameMatrix);
+	s = nomeFile(direNameList[1], fileNameMatrice);
 	createFile_fromString(s, strA1);
 	free(s);
 	for (int i = 0; i < 4; i++)
 	{
+		printf("\n\nES 2 parte %d:\n",i+1);
 		esercizio2(direNameList[i]);
+		printf("ES 3 parte %d:\n",i+1);
+		esercizio3(direNameList[i]);
+		puts("************************************************************");
 	}
     return (EXIT_SUCCESS);
 }
