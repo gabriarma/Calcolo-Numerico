@@ -47,6 +47,7 @@ int esercizio2(const char *const dir)
 		perror(NULL);
 		exit(EXIT_FAILURE);
 	}
+	fprintf(f1,"%d %d \n", b->row, b->column);
 	print_matrice(b, f1);
 	print_matrice(b, stdout);
 	fclose(f1);
@@ -57,7 +58,6 @@ int esercizio2(const char *const dir)
 	//STAMPO IL SIATEMA A|b
 	printf("\nIl sistema A|b ridotto e':\n");
 	s = nomeFile(dir, fileA_b);
-	puts(s);
 	FILE *f2 = fopen(s, "w");
 	if (!f2)
 	{
@@ -75,7 +75,7 @@ int esercizio2(const char *const dir)
 		printf("problema\n");
 		exit(-1);
 	}
-	printf("\nIl vettore x calcolato con la matrice A e il vettore b è:\n");
+	printf("\nIl vettore x calcolato con la matrice A e il vettore b ï¿½:\n");
 	MATRIX* x_ = sost_indietro(A_ridotto, b_ridotto);
 	s = nomeFile(dir, fileX_);
 	FILE *f3 = fopen(s, "w");

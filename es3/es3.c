@@ -23,7 +23,7 @@ void esercizio3(const char *const dir)
 	MATRIX *A = create_matrix(matrixFile);
 	fclose(matrixFile);
 	puts("matrice A creata");
-
+	printf("%d %d\n",A->row, A->column);
 	//CREAZIOE MATRICE B
 	s = nomeFile(dir, file_b);
 	FILE *vectorFile = fopen(s, "r");
@@ -36,7 +36,7 @@ void esercizio3(const char *const dir)
 	MATRIX *b = create_matrix(vectorFile);
 	fclose(vectorFile);
 	puts("matrice b creata");
-
+	printf("%d %d\n",b->row, b->column);
 	//calcolo norma vettore b
 	elem n = 0;
 	MATRIX *b_norma_t = clone_matrx(b);
