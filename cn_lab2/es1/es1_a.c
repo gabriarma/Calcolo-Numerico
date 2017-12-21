@@ -23,7 +23,6 @@ int es1_a()
 			n=s;
 		if(s1>n1)
 			n1=s1;
-		//printf("i=%d\t s=%d\t s1=%d\n",i,s,s1);
 	}
 	printf("la norma infinito di A e':%d\nla norma infinito di A1 e':%d\n",n,n1);
 	return 0;

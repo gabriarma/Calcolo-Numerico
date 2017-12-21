@@ -18,7 +18,7 @@ int main()
 	printf("\nEsercizio 1:\n");
 	printf("\t-punto a:\n");
 	es1_a();
-	printf("\n\n\t*�-punto b:\n");
+	printf("\n\n\t-punto b:\n");
 	s = nomeFile(direNameList[2], fileNameMatrice);
 	es1_b(s);
 	printf("\n\n\t-punto c:\n");
