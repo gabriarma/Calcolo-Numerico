@@ -9,4 +9,6 @@ int es1_b(const char *const fileName);
 int es1_c(const char *const fileNamee);
 
 int esercizio2(const char *const dir);
+
+void esercizio3(const char *const dir);
 #endif // RACCOLTA
