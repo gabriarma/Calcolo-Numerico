@@ -47,3 +47,6 @@ $(DATA_DIR):
 
 clean:
 	rm -rf $(BIN_DIR) $(DATA_DIR)
+
+tgz: clean
+	cd ..; tar cvzf cn_lab2.tgz cn_lab2
