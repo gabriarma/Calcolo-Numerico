@@ -1,0 +1,16 @@
+1)compilare il programma eseguendo il makefile
+2)spostarsi nella cartella bin(necessario per la corretta esecuzione del programma)
+3)eseguire il file binario main
+4)L'output del programma sarà salvato nella cartella data. Al suo interno vi saranno altre 4 cartelle, una per ogni matrice.
+
+1)make
+2)cd bin
+3)./main
+
+***LEGGENDA NOMI FILE****
+-matrice.txt= è la matrice principale
+-matrice_A_b.txt= è il sistema creato con la matrice principale e il vettore b, sistema A|b
+-matrice_b.txt=vettore b
+-matriceX.txt= vettore X tutti uni creato
+-matriceX_.txt= vettore X calcolato con il sistema A|b
+-matriceX_perturbato.txt= vettore X calcolato con il sistema A|b perturbato
